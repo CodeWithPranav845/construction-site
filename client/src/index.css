@@ -1,0 +1,89 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-white font-sans text-blueprint antialiased;
+  }
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply font-display font-bold tracking-tight;
+  }
+  :focus-visible {
+    outline: 2px solid #e0561f;
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  /* Page width wrapper used by every section */
+  .container-x {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+  /* Vertical rhythm between sections */
+  .section-y {
+    @apply py-16 md:py-24;
+  }
+
+  /* Form controls (public form + admin forms) */
+  .field {
+    @apply w-full rounded-sm border border-line bg-white px-3 py-2.5 text-blueprint placeholder:text-steel/70 focus:border-blueprint focus:outline-none focus:ring-1 focus:ring-blueprint disabled:bg-concrete;
+  }
+  .field-error {
+    @apply border-red-600 focus:border-red-600 focus:ring-red-600;
+  }
+  .field-label {
+    @apply mb-1.5 block text-sm font-medium text-blueprint;
+  }
+
+  /* Drafting-paper grid used on dark sections */
+  .blueprint-grid {
+    background-color: #17324d;
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+      linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+    background-size: 96px 96px, 96px 96px, 24px 24px, 24px 24px;
+  }
+}
+
+/* Hero drawing: lines draw themselves once on load */
+.draw {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: draw 1.4s ease-out forwards;
+}
+.draw-fade {
+  opacity: 0;
+  animation: draw-fade 0.6s ease-out forwards;
+}
+@keyframes draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+@keyframes draw-fade {
+  to {
+    opacity: 1;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .draw {
+    animation: none;
+    stroke-dashoffset: 0;
+  }
+  .draw-fade {
+    animation: none;
+    opacity: 1;
+  }
+}
